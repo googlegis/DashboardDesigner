@@ -1,0 +1,566 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Dashboard CurrencyCulture="zh-CN">
+  <Title Text="Network Performance" />
+  <DataSources>
+    <SqlDataSource ComponentName="dataSource1">
+      <Name>Data Source 1</Name>
+      <Connection Name="fast_Connection_oracle" ProviderKey="Oracle">
+        <Parameters>
+          <Parameter Name="server" Value="210.22.91.13:1521/fast" />
+          <Parameter Name="database" Value="" />
+          <Parameter Name="read only" Value="1" />
+          <Parameter Name="generateConnectionHelper" Value="false" />
+          <Parameter Name="userid" Value="fast" />
+          <Parameter Name="password" Value="fast*123" />
+        </Parameters>
+      </Connection>
+      <Query Type="CustomSqlQuery" Name="Data Source 1">
+        <Parameter Name="P_SDATE" Type="DevExpress.DataAccess.Expression">(System.DateTime, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089)([Parameters.P_SDATE])</Parameter>
+        <Sql>select "UI_MR_OVERVIEW_REGION_HOUR"."SDATE" as "SDATE", "UI_MR_OVERVIEW_REGION_HOUR"."SDATE_HOUR",
+       "UI_MR_OVERVIEW_REGION_HOUR"."REGION_CN" as "REGION_CN", "UI_MR_OVERVIEW_REGION_HOUR"."REGION_EN"
+       as "REGION_EN", "UI_MR_OVERVIEW_REGION_HOUR"."弱覆盖率" as "弱覆盖率",
+       "UI_MR_OVERVIEW_REGION_HOUR"."弱覆盖小区占比" as "弱覆盖小区占比", "UI_MR_OVERVIEW_REGION_HOUR"."全网弱覆盖率",
+       "UI_MR_OVERVIEW_REGION_HOUR"."全网弱覆盖小区占比", "UI_MR_OVERVIEW_REGION_HOUR"."平均重叠度",
+       "UI_MR_OVERVIEW_REGION_HOUR"."高重叠度小区占比", "UI_MR_OVERVIEW_REGION_HOUR"."全网平均重叠度",
+       "UI_MR_OVERVIEW_REGION_HOUR"."全网高重叠度小区占比", "UI_MR_OVERVIEW_REGION_HOUR"."MOD3干扰率",
+       "UI_MR_OVERVIEW_REGION_HOUR"."MOD3高干扰小区占比", "UI_MR_OVERVIEW_REGION_HOUR"."全网MOD3干扰率",
+       "UI_MR_OVERVIEW_REGION_HOUR"."全网MOD3高干扰小区占比", "UI_MR_OVERVIEW_REGION_HOUR"."下行PRB利用率",
+       "UI_MR_OVERVIEW_REGION_HOUR"."高下行PRB利用率小区占比", "UI_MR_OVERVIEW_REGION_HOUR"."全网下行PRB利用率",
+       "UI_MR_OVERVIEW_REGION_HOUR"."全网高下行PRB利用率小区占比", "UI_MR_OVERVIEW_REGION_HOUR"."上行SINR",
+       "UI_MR_OVERVIEW_REGION_HOUR"."上行SINR低小区占比", "UI_MR_OVERVIEW_REGION_HOUR"."全网上行SINR",
+       "UI_MR_OVERVIEW_REGION_HOUR"."全网上行SINR低小区占比", "UI_MR_OVERVIEW_REGION_HOUR"."平均RSRQ",
+       "UI_MR_OVERVIEW_REGION_HOUR"."平均RSRQ低小区占比", "UI_MR_OVERVIEW_REGION_HOUR"."全网平均RSRQ",
+       "UI_MR_OVERVIEW_REGION_HOUR"."全网平均RSRQ低小区占比"
+  from "UI_MR_OVERVIEW_REGION_HOUR" "UI_MR_OVERVIEW_REGION_HOUR"
+ where (to_date("UI_MR_OVERVIEW_REGION_HOUR"."SDATE",'yyyymmdd') = :P_SDATE)</Sql>
+      </Query>
+      <ResultSchema>
+        <DataSet Name="Data Source 1">
+          <View Name="Data Source 1">
+            <Field Name="SDATE" Type="String" />
+            <Field Name="SDATE_HOUR" Type="String" />
+            <Field Name="REGION_CN" Type="String" />
+            <Field Name="REGION_EN" Type="String" />
+            <Field Name="弱覆盖率" Type="Decimal" />
+            <Field Name="弱覆盖小区占比" Type="Decimal" />
+            <Field Name="全网弱覆盖率" Type="Decimal" />
+            <Field Name="全网弱覆盖小区占比" Type="Decimal" />
+            <Field Name="平均重叠度" Type="Decimal" />
+            <Field Name="高重叠度小区占比" Type="Decimal" />
+            <Field Name="全网平均重叠度" Type="Decimal" />
+            <Field Name="全网高重叠度小区占比" Type="Decimal" />
+            <Field Name="MOD3干扰率" Type="Decimal" />
+            <Field Name="MOD3高干扰小区占比" Type="Decimal" />
+            <Field Name="全网MOD3干扰率" Type="Decimal" />
+            <Field Name="全网MOD3高干扰小区占比" Type="Decimal" />
+            <Field Name="下行PRB利用率" Type="Decimal" />
+            <Field Name="高下行PRB利用率小区占比" Type="Decimal" />
+            <Field Name="全网下行PRB利用率" Type="Decimal" />
+            <Field Name="全网高下行PRB利用率小区占比" Type="Decimal" />
+            <Field Name="上行SINR" Type="Decimal" />
+            <Field Name="上行SINR低小区占比" Type="Decimal" />
+            <Field Name="全网上行SINR" Type="Decimal" />
+            <Field Name="全网上行SINR低小区占比" Type="Decimal" />
+            <Field Name="平均RSRQ" Type="Decimal" />
+            <Field Name="平均RSRQ低小区占比" Type="Decimal" />
+            <Field Name="全网平均RSRQ" Type="Decimal" />
+            <Field Name="全网平均RSRQ低小区占比" Type="Decimal" />
+          </View>
+        </DataSet>
+      </ResultSchema>
+    </SqlDataSource>
+  </DataSources>
+  <Parameters>
+    <Parameter Name="P_SDATE" Type="System.DateTime, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" Value="2015-01-01T00:00:00" Description="Begin Date" />
+  </Parameters>
+  <Items>
+    <ChoroplethMap ComponentName="choroplethMapDashboardItem1" Name="地理分布" DataSource="dataSource1" DataMember="Data Source 1" ShapefileArea="Custom" LockNavigation="true" AttributeName="NAME">
+      <InteractivityOptions MasterFilterMode="Single" />
+      <DataItems>
+        <Dimension DataMember="REGION_CN" UniqueName="DataItem0" />
+        <Measure DataMember="弱覆盖小区占比" SummaryType="Average" UniqueName="DataItem2">
+          <NumericFormat FormatType="Number" />
+        </Measure>
+        <Measure DataMember="弱覆盖率" SummaryType="Average" UniqueName="DataItem1">
+          <NumericFormat FormatType="Number" />
+        </Measure>
+        <Measure DataMember="平均重叠度" SummaryType="Average" UniqueName="DataItem3">
+          <NumericFormat FormatType="Number" />
+        </Measure>
+        <Measure DataMember="高重叠度小区占比" SummaryType="Average" UniqueName="DataItem4">
+          <NumericFormat FormatType="Number" />
+        </Measure>
+        <Measure DataMember="MOD3干扰率" SummaryType="Average" UniqueName="DataItem5">
+          <NumericFormat FormatType="Number" />
+        </Measure>
+        <Measure DataMember="MOD3高干扰小区占比" SummaryType="Average" UniqueName="DataItem6">
+          <NumericFormat FormatType="Number" />
+        </Measure>
+        <Measure DataMember="下行PRB利用率" SummaryType="Average" UniqueName="DataItem7">
+          <NumericFormat FormatType="Number" />
+        </Measure>
+        <Measure DataMember="高下行PRB利用率小区占比" SummaryType="Average" UniqueName="DataItem8">
+          <NumericFormat FormatType="Number" />
+        </Measure>
+        <Measure DataMember="上行SINR" SummaryType="Average" UniqueName="DataItem9">
+          <NumericFormat FormatType="Number" />
+        </Measure>
+        <Measure DataMember="上行SINR低小区占比" SummaryType="Average" UniqueName="DataItem10">
+          <NumericFormat FormatType="Number" />
+        </Measure>
+        <Measure DataMember="平均RSRQ" SummaryType="Average" UniqueName="DataItem11">
+          <NumericFormat FormatType="Number" />
+        </Measure>
+        <Measure DataMember="平均RSRQ低小区占比" SummaryType="Average" UniqueName="DataItem12">
+          <NumericFormat FormatType="Number" />
+        </Measure>
+      </DataItems>
+      <CustomShapefile Url="C:\inetpub\wwwroot\SO30\App_Data\DashBoard\newMap\上海全境_区县界面_region.shp" />
+      <ViewArea TopLatitude="31.86130617" BottomLatitude="30.689588519999997" LeftLongitude="120.85183547999999" RightLongitude="121.93653149999999" CenterPointLatitude="31.27726682582076" CenterPointLongitude="121.39418348999997" />
+      <MapLegend Visible="true" />
+      <WeightedLegend />
+      <AttributeDimension UniqueName="DataItem0" />
+      <Maps>
+        <ValueMap>
+          <Value UniqueName="DataItem1" />
+          <CustomScale PercentScale="false">
+            <RangeStop>0</RangeStop>
+            <RangeStop>10</RangeStop>
+            <RangeStop>20</RangeStop>
+            <RangeStop>35</RangeStop>
+            <RangeStop>40</RangeStop>
+          </CustomScale>
+          <CustomPalette>
+            <Color>-12490271</Color>
+            <Color>-16728065</Color>
+            <Color>-8323200</Color>
+            <Color>-128</Color>
+            <Color>-32640</Color>
+          </CustomPalette>
+        </ValueMap>
+        <ValueMap>
+          <Value UniqueName="DataItem2" />
+          <CustomScale PercentScale="false">
+            <RangeStop>0</RangeStop>
+            <RangeStop>10</RangeStop>
+            <RangeStop>20</RangeStop>
+            <RangeStop>35</RangeStop>
+            <RangeStop>40</RangeStop>
+          </CustomScale>
+          <CustomPalette>
+            <Color>-12490271</Color>
+            <Color>-16728065</Color>
+            <Color>-8323200</Color>
+            <Color>-128</Color>
+            <Color>-32640</Color>
+          </CustomPalette>
+        </ValueMap>
+        <ValueMap>
+          <Value UniqueName="DataItem3" />
+          <CustomScale PercentScale="false">
+            <RangeStop>0</RangeStop>
+            <RangeStop>10</RangeStop>
+            <RangeStop>20</RangeStop>
+            <RangeStop>35</RangeStop>
+            <RangeStop>40</RangeStop>
+          </CustomScale>
+          <CustomPalette>
+            <Color>-12490271</Color>
+            <Color>-16728065</Color>
+            <Color>-8323200</Color>
+            <Color>-128</Color>
+            <Color>-32640</Color>
+          </CustomPalette>
+        </ValueMap>
+        <ValueMap>
+          <Value UniqueName="DataItem4" />
+          <CustomScale PercentScale="false">
+            <RangeStop>0</RangeStop>
+            <RangeStop>10</RangeStop>
+            <RangeStop>20</RangeStop>
+            <RangeStop>35</RangeStop>
+            <RangeStop>40</RangeStop>
+          </CustomScale>
+          <CustomPalette>
+            <Color>-12490271</Color>
+            <Color>-16728065</Color>
+            <Color>-8323200</Color>
+            <Color>-128</Color>
+            <Color>-32640</Color>
+          </CustomPalette>
+        </ValueMap>
+        <ValueMap>
+          <Value UniqueName="DataItem5" />
+          <CustomScale PercentScale="false">
+            <RangeStop>0</RangeStop>
+            <RangeStop>10</RangeStop>
+            <RangeStop>20</RangeStop>
+            <RangeStop>35</RangeStop>
+            <RangeStop>40</RangeStop>
+          </CustomScale>
+          <CustomPalette>
+            <Color>-12490271</Color>
+            <Color>-16728065</Color>
+            <Color>-8323200</Color>
+            <Color>-128</Color>
+            <Color>-32640</Color>
+          </CustomPalette>
+        </ValueMap>
+        <ValueMap>
+          <Value UniqueName="DataItem6" />
+          <CustomScale PercentScale="false">
+            <RangeStop>0</RangeStop>
+            <RangeStop>10</RangeStop>
+            <RangeStop>20</RangeStop>
+            <RangeStop>35</RangeStop>
+            <RangeStop>40</RangeStop>
+          </CustomScale>
+          <CustomPalette>
+            <Color>-12490271</Color>
+            <Color>-16728065</Color>
+            <Color>-8323200</Color>
+            <Color>-128</Color>
+            <Color>-32640</Color>
+          </CustomPalette>
+        </ValueMap>
+        <ValueMap>
+          <Value UniqueName="DataItem7" />
+          <CustomScale PercentScale="false">
+            <RangeStop>0</RangeStop>
+            <RangeStop>10</RangeStop>
+            <RangeStop>20</RangeStop>
+            <RangeStop>35</RangeStop>
+            <RangeStop>40</RangeStop>
+          </CustomScale>
+          <CustomPalette>
+            <Color>-12490271</Color>
+            <Color>-16728065</Color>
+            <Color>-8323200</Color>
+            <Color>-128</Color>
+            <Color>-32640</Color>
+          </CustomPalette>
+        </ValueMap>
+        <ValueMap>
+          <Value UniqueName="DataItem8" />
+          <CustomScale PercentScale="false">
+            <RangeStop>0</RangeStop>
+            <RangeStop>10</RangeStop>
+            <RangeStop>20</RangeStop>
+            <RangeStop>35</RangeStop>
+            <RangeStop>40</RangeStop>
+          </CustomScale>
+          <CustomPalette>
+            <Color>-12490271</Color>
+            <Color>-16728065</Color>
+            <Color>-8323200</Color>
+            <Color>-128</Color>
+            <Color>-32640</Color>
+          </CustomPalette>
+        </ValueMap>
+        <ValueMap>
+          <Value UniqueName="DataItem9" />
+          <CustomScale PercentScale="false">
+            <RangeStop>0</RangeStop>
+            <RangeStop>10</RangeStop>
+            <RangeStop>20</RangeStop>
+            <RangeStop>35</RangeStop>
+            <RangeStop>40</RangeStop>
+          </CustomScale>
+          <CustomPalette>
+            <Color>-32640</Color>
+            <Color>-128</Color>
+            <Color>-8323200</Color>
+            <Color>-16728065</Color>
+            <Color>-12490271</Color>
+          </CustomPalette>
+        </ValueMap>
+        <ValueMap>
+          <Value UniqueName="DataItem10" />
+          <CustomScale PercentScale="false">
+            <RangeStop>0</RangeStop>
+            <RangeStop>10</RangeStop>
+            <RangeStop>20</RangeStop>
+            <RangeStop>35</RangeStop>
+            <RangeStop>40</RangeStop>
+          </CustomScale>
+          <CustomPalette>
+            <Color>-12490271</Color>
+            <Color>-16728065</Color>
+            <Color>-8323200</Color>
+            <Color>-128</Color>
+            <Color>-32640</Color>
+          </CustomPalette>
+        </ValueMap>
+        <ValueMap>
+          <Value UniqueName="DataItem11" />
+          <CustomScale PercentScale="false">
+            <RangeStop>-30</RangeStop>
+            <RangeStop>-20</RangeStop>
+            <RangeStop>-10</RangeStop>
+            <RangeStop>-5</RangeStop>
+            <RangeStop>0</RangeStop>
+          </CustomScale>
+          <CustomPalette>
+            <Color>-32640</Color>
+            <Color>-128</Color>
+            <Color>-8323200</Color>
+            <Color>-16728065</Color>
+            <Color>-12490271</Color>
+          </CustomPalette>
+        </ValueMap>
+        <ValueMap>
+          <Value UniqueName="DataItem12" />
+          <CustomScale PercentScale="false">
+            <RangeStop>0</RangeStop>
+            <RangeStop>10</RangeStop>
+            <RangeStop>20</RangeStop>
+            <RangeStop>35</RangeStop>
+            <RangeStop>40</RangeStop>
+          </CustomScale>
+          <CustomPalette>
+            <Color>-12490271</Color>
+            <Color>-16728065</Color>
+            <Color>-8323200</Color>
+            <Color>-128</Color>
+            <Color>-32640</Color>
+          </CustomPalette>
+        </ValueMap>
+      </Maps>
+    </ChoroplethMap>
+    <Chart ComponentName="chartDashboardItem1" Name="时间分布" ShowCaption="false" DataSource="dataSource1" DataMember="Data Source 1">
+      <InteractivityOptions TargetDimensions="Series" />
+      <DataItems>
+        <Measure DataMember="全网弱覆盖率" Name="全网弱覆盖率 (Avg)" SummaryType="Average" UniqueName="DataItem2">
+          <NumericFormat FormatType="Number" />
+        </Measure>
+        <Dimension DataMember="SDATE_HOUR" UniqueName="DataItem0" />
+        <Measure DataMember="弱覆盖率" Name="弱覆盖率 (Avg)" SummaryType="Average" UniqueName="DataItem3">
+          <NumericFormat FormatType="Number" />
+        </Measure>
+      </DataItems>
+      <Arguments>
+        <Argument UniqueName="DataItem0" />
+      </Arguments>
+      <Panes>
+        <Pane Name="Pane 1">
+          <AxisY TitleVisible="false" />
+          <Series>
+            <Simple SeriesType="Area">
+              <Value UniqueName="DataItem2" />
+            </Simple>
+            <Simple>
+              <Value UniqueName="DataItem3" />
+            </Simple>
+          </Series>
+        </Pane>
+      </Panes>
+    </Chart>
+    <Chart ComponentName="chartDashboardItem2" Name="Chart 1" ShowCaption="false" DataSource="dataSource1" DataMember="Data Source 1">
+      <DataItems>
+        <Dimension DataMember="SDATE_HOUR" UniqueName="DataItem0" />
+        <Measure DataMember="全网下行PRB利用率" Name="全网下行PRB利用率 (Avg)" SummaryType="Average" UniqueName="DataItem2">
+          <NumericFormat FormatType="Number" />
+        </Measure>
+        <Measure DataMember="下行PRB利用率" Name="下行PRB利用率 (Avg)" SummaryType="Average" UniqueName="DataItem3">
+          <NumericFormat FormatType="Number" />
+        </Measure>
+      </DataItems>
+      <Arguments>
+        <Argument UniqueName="DataItem0" />
+      </Arguments>
+      <Panes>
+        <Pane Name="Pane 1">
+          <AxisY TitleVisible="false" />
+          <Series>
+            <Simple SeriesType="Area">
+              <Value UniqueName="DataItem2" />
+            </Simple>
+            <Simple>
+              <Value UniqueName="DataItem3" />
+            </Simple>
+          </Series>
+        </Pane>
+      </Panes>
+    </Chart>
+    <Chart ComponentName="chartDashboardItem3" Name="Chart 2" ShowCaption="false" DataSource="dataSource1" DataMember="Data Source 1">
+      <DataItems>
+        <Dimension DataMember="SDATE_HOUR" UniqueName="DataItem0" />
+        <Measure DataMember="全网平均重叠度" Name="全网平均重叠度 (Avg)" SummaryType="Average" UniqueName="DataItem2">
+          <NumericFormat FormatType="Number" />
+        </Measure>
+        <Measure DataMember="平均重叠度" Name="平均重叠度 (Avg)" SummaryType="Average" UniqueName="DataItem3">
+          <NumericFormat FormatType="Number" />
+        </Measure>
+      </DataItems>
+      <Arguments>
+        <Argument UniqueName="DataItem0" />
+      </Arguments>
+      <Panes>
+        <Pane Name="Pane 1">
+          <AxisY TitleVisible="false" />
+          <Series>
+            <Simple SeriesType="Area">
+              <Value UniqueName="DataItem2" />
+            </Simple>
+            <Simple>
+              <Value UniqueName="DataItem3" />
+            </Simple>
+          </Series>
+        </Pane>
+      </Panes>
+    </Chart>
+    <Card ComponentName="cardDashboardItem1" Name="对比全网均值" DataSource="dataSource1" DataMember="Data Source 1" ContentArrangementMode="FixedColumnCount">
+      <DataItems>
+        <Measure DataMember="高重叠度小区占比" SummaryType="Average" UniqueName="DataItem8">
+          <NumericFormat FormatType="Number" />
+        </Measure>
+        <Measure DataMember="全网高重叠度小区占比" SummaryType="Average" UniqueName="DataItem7" />
+        <Measure DataMember="全网MOD3高干扰小区占比" SummaryType="Average" UniqueName="DataItem1" />
+        <Measure DataMember="弱覆盖小区占比" SummaryType="Average" UniqueName="DataItem4">
+          <NumericFormat FormatType="Number" />
+        </Measure>
+        <Measure DataMember="全网弱覆盖小区占比" SummaryType="Average" UniqueName="DataItem3" />
+        <Measure DataMember="全网高下行PRB利用率小区占比" SummaryType="Average" UniqueName="DataItem5" />
+        <Measure DataMember="MOD3高干扰小区占比" SummaryType="Average" UniqueName="DataItem2">
+          <NumericFormat FormatType="Number" />
+        </Measure>
+        <Measure DataMember="高下行PRB利用率小区占比" SummaryType="Average" UniqueName="DataItem6">
+          <NumericFormat FormatType="Number" />
+        </Measure>
+        <Measure DataMember="上行SINR低小区占比" SummaryType="Average" UniqueName="DataItem9">
+          <NumericFormat FormatType="Number" />
+        </Measure>
+        <Measure DataMember="全网上行SINR低小区占比" SummaryType="Average" UniqueName="DataItem10" />
+        <Measure DataMember="全网平均RSRQ低小区占比" SummaryType="Average" UniqueName="DataItem12" />
+        <Measure DataMember="平均RSRQ低小区占比" SummaryType="Average" UniqueName="DataItem11">
+          <NumericFormat FormatType="Number" />
+        </Measure>
+      </DataItems>
+      <Card Name="弱覆盖小区占比 Avg) vs 全网弱覆盖小区占比 (Avg)">
+        <ActualValue UniqueName="DataItem4" />
+        <TargetValue UniqueName="DataItem3" />
+        <DeltaOptions ResultIndicationMode="LessIsGood" />
+      </Card>
+      <Card Name="高重叠度小区占比 Avg)vs 全网高重叠度小区占比 (Avg)">
+        <ActualValue UniqueName="DataItem8" />
+        <TargetValue UniqueName="DataItem7" />
+        <DeltaOptions ResultIndicationMode="LessIsGood" />
+      </Card>
+      <Card Name="MOD3高干扰小区占比 Avg)vs 全网MOD3高干扰小区占比 (Avg)">
+        <ActualValue UniqueName="DataItem2" />
+        <TargetValue UniqueName="DataItem1" />
+        <DeltaOptions ResultIndicationMode="LessIsGood" />
+      </Card>
+      <Card Name="高下行PRB利用率小区占比 Avg)vs 全网高下行PRB利用率小区占比 (Avg)">
+        <ActualValue UniqueName="DataItem6" />
+        <TargetValue UniqueName="DataItem5" />
+        <DeltaOptions ResultIndicationMode="LessIsGood" />
+      </Card>
+      <Card Name="上行SINR低小区占比 Avg)vs 全网上行SINR低小区占比 (Avg)">
+        <ActualValue UniqueName="DataItem9" />
+        <TargetValue UniqueName="DataItem10" />
+        <DeltaOptions ResultIndicationMode="LessIsGood" />
+      </Card>
+      <Card Name="平均RSRQ低小区占比 Avg)vs 全网平均RSRQ低小区占比 Avg)">
+        <ActualValue UniqueName="DataItem11" />
+        <TargetValue UniqueName="DataItem12" />
+        <DeltaOptions ResultIndicationMode="LessIsGood" />
+      </Card>
+    </Card>
+    <Chart ComponentName="chartDashboardItem4" Name="Chart 3" ShowCaption="false" DataSource="dataSource1" DataMember="Data Source 1">
+      <DataItems>
+        <Dimension DataMember="SDATE_HOUR" UniqueName="DataItem0" />
+        <Measure DataMember="上行SINR" Name="上行SINR (Avg)" SummaryType="Average" UniqueName="DataItem3">
+          <NumericFormat FormatType="Number" />
+        </Measure>
+        <Measure DataMember="全网上行SINR" Name="全网上行SINR (Avg)" SummaryType="Average" UniqueName="DataItem2">
+          <NumericFormat FormatType="Number" />
+        </Measure>
+      </DataItems>
+      <Arguments>
+        <Argument UniqueName="DataItem0" />
+      </Arguments>
+      <Panes>
+        <Pane Name="Pane 1">
+          <AxisY TitleVisible="false" />
+          <Series>
+            <Simple SeriesType="Area">
+              <Value UniqueName="DataItem2" />
+            </Simple>
+            <Simple>
+              <Value UniqueName="DataItem3" />
+            </Simple>
+          </Series>
+        </Pane>
+      </Panes>
+    </Chart>
+    <Chart ComponentName="chartDashboardItem5" Name="Chart 4" ShowCaption="false" DataSource="dataSource1" DataMember="Data Source 1">
+      <DataItems>
+        <Dimension DataMember="SDATE_HOUR" UniqueName="DataItem0" />
+        <Measure DataMember="全网MOD3干扰率" Name="全网MOD3干扰率 (Avg)" SummaryType="Average" UniqueName="DataItem2">
+          <NumericFormat FormatType="Number" />
+        </Measure>
+        <Measure DataMember="MOD3干扰率" Name="MOD3干扰率 (Avg)" SummaryType="Average" UniqueName="DataItem3">
+          <NumericFormat FormatType="Number" />
+        </Measure>
+      </DataItems>
+      <Arguments>
+        <Argument UniqueName="DataItem0" />
+      </Arguments>
+      <Panes>
+        <Pane Name="Pane 1">
+          <AxisY TitleVisible="false" />
+          <Series>
+            <Simple SeriesType="Area">
+              <Value UniqueName="DataItem2" />
+            </Simple>
+            <Simple>
+              <Value UniqueName="DataItem3" />
+            </Simple>
+          </Series>
+        </Pane>
+      </Panes>
+    </Chart>
+    <Chart ComponentName="chartDashboardItem6" Name="Chart 3" ShowCaption="false" DataSource="dataSource1" DataMember="Data Source 1">
+      <DataItems>
+        <Dimension DataMember="SDATE_HOUR" UniqueName="DataItem0" />
+        <Measure DataMember="平均RSRQ" Name="平均RSRQ (Avg)" SummaryType="Average" UniqueName="DataItem1" />
+        <Measure DataMember="全网平均RSRQ" Name="全网平均RSRQ (Avg)" SummaryType="Average" UniqueName="DataItem2" />
+      </DataItems>
+      <Arguments>
+        <Argument UniqueName="DataItem0" />
+      </Arguments>
+      <Panes>
+        <Pane Name="Pane 1">
+          <AxisY Reverse="true" TitleVisible="false" AlwaysShowZeroLevel="false" />
+          <Series>
+            <Simple SeriesType="Area">
+              <Value UniqueName="DataItem2" />
+            </Simple>
+            <Simple>
+              <Value UniqueName="DataItem1" />
+            </Simple>
+          </Series>
+        </Pane>
+      </Panes>
+    </Chart>
+  </Items>
+  <LayoutTree>
+    <LayoutGroup Orientation="Vertical">
+      <LayoutGroup Weight="36.767036450079239">
+        <LayoutItem DashboardItem="choroplethMapDashboardItem1" Weight="44.727272727272727" />
+        <LayoutItem DashboardItem="cardDashboardItem1" Weight="55.272727272727273" />
+      </LayoutGroup>
+      <LayoutGroup Weight="31.061806656101425">
+        <LayoutItem DashboardItem="chartDashboardItem1" Weight="34.909090909090907" />
+        <LayoutItem DashboardItem="chartDashboardItem3" Weight="33.18181818181818" />
+        <LayoutItem DashboardItem="chartDashboardItem5" Weight="31.90909090909091" />
+      </LayoutGroup>
+      <LayoutGroup Weight="32.171156893819337">
+        <LayoutItem DashboardItem="chartDashboardItem2" Weight="34.909090909090907" />
+        <LayoutItem DashboardItem="chartDashboardItem4" Weight="33.18181818181818" />
+        <LayoutItem DashboardItem="chartDashboardItem6" Weight="31.90909090909091" />
+      </LayoutGroup>
+    </LayoutGroup>
+  </LayoutTree>
+</Dashboard>

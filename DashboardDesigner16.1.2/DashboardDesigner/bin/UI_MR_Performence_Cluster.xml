@@ -1,0 +1,312 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Dashboard CurrencyCulture="zh-CN">
+  <Title Text="网格指标分布" />
+  <DataSources>
+    <SqlDataSource ComponentName="dashboardSqlDataSource1">
+      <Name>SQL Data Source 1</Name>
+      <Connection Name="10.221.36.137:1521/fast_Connection" ProviderKey="Oracle">
+        <Parameters>
+          <Parameter Name="server" Value="10.141.132.127:1521/fast" />
+          <Parameter Name="database" Value="" />
+          <Parameter Name="read only" Value="1" />
+          <Parameter Name="generateConnectionHelper" Value="false" />
+          <Parameter Name="userid" Value="fast" />
+          <Parameter Name="password" Value="fast*123" />
+        </Parameters>
+      </Connection>
+      <Query Type="CustomSqlQuery" Name="CustomSqlQuery">
+        <Parameter Name="P_SDATE" Type="DevExpress.DataAccess.Expression">(System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089)([Parameters.P_SDATE])</Parameter>
+        <Sql>select t.sdate, t.shour + 0 as shour, t.dt_cluster as Cluster_Id,
+       t.cmcc_overshoot_cell12_rate as 过覆盖率CMCC12, t.cmcc_overlap_rate
+       as 重叠覆盖率CMCC, t.adj_count_full as 邻区上报数量, t.ltescrsrp
+       as 平均RSRP, t.usercount_percell as 每小区用户数, t.mro_rate_mod3
+       as MOD3干扰比例, t.mro_overlap_count_rate as 重叠邻区比例,
+       t.rsrp_low_rate as 弱覆盖比例, t.tadv_dist_avg as 平均TA距离
+  from rpt_fast_kpi_cluster_hour t
+ where t.sdate = to_char (: P_SDATE, 'yyyymmdd')</Sql>
+      </Query>
+      <ResultSchema>
+        <DataSet Name="SQL Data Source 1">
+          <View Name="CustomSqlQuery">
+            <Field Name="SDATE" Type="String" />
+            <Field Name="SHOUR" Type="Decimal" />
+            <Field Name="CLUSTER_ID" Type="String" />
+            <Field Name="过覆盖率CMCC12" Type="Decimal" />
+            <Field Name="重叠覆盖率CMCC" Type="Decimal" />
+            <Field Name="邻区上报数量" Type="Decimal" />
+            <Field Name="平均RSRP" Type="Decimal" />
+            <Field Name="每小区用户数" Type="Decimal" />
+            <Field Name="MOD3干扰比例" Type="Decimal" />
+            <Field Name="重叠邻区比例" Type="Decimal" />
+            <Field Name="弱覆盖比例" Type="Decimal" />
+            <Field Name="平均TA距离" Type="Decimal" />
+          </View>
+        </DataSet>
+      </ResultSchema>
+    </SqlDataSource>
+  </DataSources>
+  <Parameters>
+    <Parameter Name="P_SDATE" Type="System.DateTime, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" Value="2015-01-01T00:00:00" Description="起始日期" />
+  </Parameters>
+  <Items>
+    <ChoroplethMap ComponentName="choroplethMapDashboardItem1" Name=" " DataSource="dashboardSqlDataSource1" DataMember="CustomSqlQuery" ShapefileArea="Custom" ShapeTitleAttributeName="ID" AttributeName="ID">
+      <InteractivityOptions MasterFilterMode="Single" />
+      <DataItems>
+        <Dimension DataMember="CLUSTER_ID" UniqueName="DataItem0" />
+        <Measure DataMember="平均RSRP" SummaryType="Average" UniqueName="DataItem1">
+          <NumericFormat FormatType="Number" />
+        </Measure>
+        <Measure DataMember="MOD3干扰比例" SummaryType="Average" UniqueName="DataItem2">
+          <NumericFormat FormatType="Number" />
+        </Measure>
+        <Measure DataMember="过覆盖率CMCC12" SummaryType="Average" UniqueName="DataItem3">
+          <NumericFormat FormatType="Number" />
+        </Measure>
+        <Measure DataMember="邻区上报数量" SummaryType="Average" UniqueName="DataItem4">
+          <NumericFormat FormatType="Number" />
+        </Measure>
+        <Measure DataMember="每小区用户数" SummaryType="Average" UniqueName="DataItem5">
+          <NumericFormat FormatType="Number" />
+        </Measure>
+        <Measure DataMember="平均TA距离" SummaryType="Average" UniqueName="DataItem6">
+          <NumericFormat FormatType="Number" />
+        </Measure>
+        <Measure DataMember="弱覆盖比例" SummaryType="Average" UniqueName="DataItem7">
+          <NumericFormat FormatType="Number" />
+        </Measure>
+        <Measure DataMember="重叠覆盖率CMCC" SummaryType="Average" UniqueName="DataItem8">
+          <NumericFormat FormatType="Number" />
+        </Measure>
+        <Measure DataMember="重叠邻区比例" SummaryType="Average" UniqueName="DataItem9">
+          <NumericFormat FormatType="Number" />
+        </Measure>
+      </DataItems>
+      <CustomShapefile Url="C:\inetpub\wwwroot\SO30\App_Data\DashBoard\NewMap\ShangHai\网格分区_市区和郊区_region.shp" />
+      <ViewArea TopLatitude="31.646587" BottomLatitude="30.701963" LeftLongitude="121.027205" RightLongitude="121.951925" CenterPointLatitude="31.175452826897477" CenterPointLongitude="121.489565" />
+      <MapLegend Visible="true" />
+      <WeightedLegend />
+      <AttributeDimension UniqueName="DataItem0" />
+      <Maps>
+        <ValueMap Name="平均RSRP" ValueName="平均RSRP">
+          <Value UniqueName="DataItem1" />
+          <CustomScale PercentScale="false">
+            <RangeStop>-140</RangeStop>
+            <RangeStop>-105</RangeStop>
+            <RangeStop>-102</RangeStop>
+            <RangeStop>-100</RangeStop>
+            <RangeStop>-98</RangeStop>
+          </CustomScale>
+          <CustomPalette>
+            <Color>-32640</Color>
+            <Color>-16256</Color>
+            <Color>-128</Color>
+            <Color>-8323200</Color>
+            <Color>-8355585</Color>
+          </CustomPalette>
+        </ValueMap>
+        <ValueMap Name="弱覆盖比例" ValueName="弱覆盖比例">
+          <Value UniqueName="DataItem7" />
+          <CustomScale PercentScale="false">
+            <RangeStop>0</RangeStop>
+            <RangeStop>12</RangeStop>
+            <RangeStop>15</RangeStop>
+            <RangeStop>20</RangeStop>
+            <RangeStop>25</RangeStop>
+          </CustomScale>
+          <CustomPalette>
+            <Color>-8355585</Color>
+            <Color>-8323200</Color>
+            <Color>-128</Color>
+            <Color>-16256</Color>
+            <Color>-32640</Color>
+          </CustomPalette>
+        </ValueMap>
+        <ValueMap Name="MOD3干扰比例" ValueName="MOD3干扰比例">
+          <Value UniqueName="DataItem2" />
+          <CustomScale PercentScale="false">
+            <RangeStop>0</RangeStop>
+            <RangeStop>15</RangeStop>
+            <RangeStop>25</RangeStop>
+            <RangeStop>30</RangeStop>
+            <RangeStop>40</RangeStop>
+          </CustomScale>
+          <CustomPalette>
+            <Color>-8355585</Color>
+            <Color>-8323200</Color>
+            <Color>-128</Color>
+            <Color>-16256</Color>
+            <Color>-32640</Color>
+          </CustomPalette>
+        </ValueMap>
+        <ValueMap Name="重叠覆盖率CMCC" ValueName="重叠覆盖率CMCC">
+          <Value UniqueName="DataItem8" />
+          <CustomScale PercentScale="false">
+            <RangeStop>0</RangeStop>
+            <RangeStop>2</RangeStop>
+            <RangeStop>5</RangeStop>
+            <RangeStop>10</RangeStop>
+            <RangeStop>15</RangeStop>
+          </CustomScale>
+          <CustomPalette>
+            <Color>-8355585</Color>
+            <Color>-8323200</Color>
+            <Color>-128</Color>
+            <Color>-16256</Color>
+            <Color>-32640</Color>
+          </CustomPalette>
+        </ValueMap>
+        <ValueMap Name="重叠邻区比例" ValueName="重叠邻区比例">
+          <Value UniqueName="DataItem9" />
+          <CustomScale PercentScale="false">
+            <RangeStop>0</RangeStop>
+            <RangeStop>25</RangeStop>
+            <RangeStop>30</RangeStop>
+            <RangeStop>35</RangeStop>
+            <RangeStop>40</RangeStop>
+          </CustomScale>
+          <CustomPalette>
+            <Color>-8355585</Color>
+            <Color>-8323200</Color>
+            <Color>-128</Color>
+            <Color>-16256</Color>
+            <Color>-32640</Color>
+          </CustomPalette>
+        </ValueMap>
+        <ValueMap Name="过覆盖率CMCC12" ValueName="过覆盖率CMCC12">
+          <Value UniqueName="DataItem3" />
+          <CustomScale PercentScale="false">
+            <RangeStop>0</RangeStop>
+            <RangeStop>2</RangeStop>
+            <RangeStop>5</RangeStop>
+            <RangeStop>10</RangeStop>
+            <RangeStop>15</RangeStop>
+          </CustomScale>
+          <CustomPalette>
+            <Color>-8355585</Color>
+            <Color>-8323200</Color>
+            <Color>-128</Color>
+            <Color>-16256</Color>
+            <Color>-32640</Color>
+          </CustomPalette>
+        </ValueMap>
+        <ValueMap Name="邻区上报数量" ValueName="邻区上报数量">
+          <Value UniqueName="DataItem4" />
+          <CustomScale PercentScale="false">
+            <RangeStop>0</RangeStop>
+            <RangeStop>10</RangeStop>
+            <RangeStop>20</RangeStop>
+            <RangeStop>40</RangeStop>
+            <RangeStop>60</RangeStop>
+          </CustomScale>
+          <CustomPalette>
+            <Color>-8355585</Color>
+            <Color>-8323200</Color>
+            <Color>-128</Color>
+            <Color>-16256</Color>
+            <Color>-32640</Color>
+          </CustomPalette>
+        </ValueMap>
+        <ValueMap Name="每小区用户数" ValueName="每小区用户数">
+          <Value UniqueName="DataItem5" />
+          <CustomScale PercentScale="false">
+            <RangeStop>0</RangeStop>
+            <RangeStop>40</RangeStop>
+            <RangeStop>60</RangeStop>
+            <RangeStop>80</RangeStop>
+            <RangeStop>120</RangeStop>
+          </CustomScale>
+          <CustomPalette>
+            <Color>-8355585</Color>
+            <Color>-8323200</Color>
+            <Color>-128</Color>
+            <Color>-16256</Color>
+            <Color>-32640</Color>
+          </CustomPalette>
+        </ValueMap>
+        <ValueMap Name="平均TA距离" ValueName="平均TA距离">
+          <Value UniqueName="DataItem6" />
+          <CustomScale PercentScale="false">
+            <RangeStop>0</RangeStop>
+            <RangeStop>110</RangeStop>
+            <RangeStop>130</RangeStop>
+            <RangeStop>150</RangeStop>
+            <RangeStop>200</RangeStop>
+          </CustomScale>
+          <CustomPalette>
+            <Color>-8355585</Color>
+            <Color>-8323200</Color>
+            <Color>-128</Color>
+            <Color>-16256</Color>
+            <Color>-32640</Color>
+          </CustomPalette>
+        </ValueMap>
+      </Maps>
+    </ChoroplethMap>
+    <Card ComponentName="cardDashboardItem1" Name="均值及趋势" DataSource="dashboardSqlDataSource1" DataMember="CustomSqlQuery" ContentArrangementMode="FixedRowCount" ContentLineCount="16">
+      <DataItems>
+        <Dimension DataMember="SHOUR" UniqueName="DataItem0" />
+        <Measure DataMember="平均RSRP" SummaryType="Average" UniqueName="DataItem1">
+          <NumericFormat FormatType="Number" />
+        </Measure>
+        <Measure DataMember="弱覆盖比例" SummaryType="Average" UniqueName="DataItem3">
+          <NumericFormat FormatType="Number" />
+        </Measure>
+        <Measure DataMember="重叠覆盖率CMCC" SummaryType="Average" UniqueName="DataItem4">
+          <NumericFormat FormatType="Number" />
+        </Measure>
+        <Measure DataMember="过覆盖率CMCC12" SummaryType="Average" UniqueName="DataItem5">
+          <NumericFormat FormatType="Number" />
+        </Measure>
+        <Measure DataMember="MOD3干扰比例" SummaryType="Average" UniqueName="DataItem6">
+          <NumericFormat FormatType="Number" />
+        </Measure>
+        <Measure DataMember="邻区上报数量" SummaryType="Average" UniqueName="DataItem7">
+          <NumericFormat FormatType="Number" />
+        </Measure>
+        <Measure DataMember="每小区用户数" SummaryType="Average" UniqueName="DataItem8">
+          <NumericFormat FormatType="Number" />
+        </Measure>
+        <Measure DataMember="平均TA距离" SummaryType="Average" UniqueName="DataItem9">
+          <NumericFormat FormatType="Number" />
+        </Measure>
+        <Measure DataMember="重叠邻区比例" SummaryType="Average" UniqueName="DataItem10">
+          <NumericFormat FormatType="Number" />
+        </Measure>
+      </DataItems>
+      <Card Name="平均RSRP (Average)">
+        <ActualValue UniqueName="DataItem1" />
+      </Card>
+      <Card Name="弱覆盖比例 (Average)">
+        <ActualValue UniqueName="DataItem3" />
+      </Card>
+      <Card Name="重叠覆盖率CMCC (Average)">
+        <ActualValue UniqueName="DataItem4" />
+      </Card>
+      <Card>
+        <ActualValue UniqueName="DataItem10" />
+      </Card>
+      <Card Name="过覆盖率CMCC12 (Average)">
+        <ActualValue UniqueName="DataItem5" />
+      </Card>
+      <Card Name="MOD3干扰比例 (Average)">
+        <ActualValue UniqueName="DataItem6" />
+      </Card>
+      <Card Name="邻区上报数量 (Average)">
+        <ActualValue UniqueName="DataItem7" />
+      </Card>
+      <Card Name="每小区用户数 (Average)">
+        <ActualValue UniqueName="DataItem8" />
+      </Card>
+      <Card Name="平均TA距离 (Average)">
+        <ActualValue UniqueName="DataItem9" />
+      </Card>
+      <SparklineArgument UniqueName="DataItem0" />
+    </Card>
+  </Items>
+  <LayoutTree>
+    <LayoutGroup>
+      <LayoutItem DashboardItem="choroplethMapDashboardItem1" Weight="80.3921568627451" />
+      <LayoutItem DashboardItem="cardDashboardItem1" Weight="19.607843137254903" />
+    </LayoutGroup>
+  </LayoutTree>
+</Dashboard>

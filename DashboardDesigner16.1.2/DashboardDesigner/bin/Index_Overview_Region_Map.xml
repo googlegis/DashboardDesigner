@@ -1,0 +1,211 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Dashboard CurrencyCulture="zh-CN">
+  <Title Text="区域指数分布" />
+  <DataSources>
+    <SqlDataSource ComponentName="dataSource1">
+      <Name>fast_overview_dashboard_map</Name>
+      <Connection Name="10.221.36.137:1521/fast_Connection" ProviderKey="Oracle">
+        <Parameters>
+          <Parameter Name="server" Value="210.22.91.13:1521/fast" />
+          <Parameter Name="database" Value="" />
+          <Parameter Name="read only" Value="1" />
+          <Parameter Name="generateConnectionHelper" Value="false" />
+          <Parameter Name="userid" Value="fastsx" />
+          <Parameter Name="password" Value="fastsx*123" />
+        </Parameters>
+      </Connection>
+      <Query Type="CustomSqlQuery" Name="fast_overview_dashboard_map">
+        <Parameter Name="P_SDATE" Type="DevExpress.DataAccess.Expression">(System.DateTime, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089)([Parameters.P_SDATE])</Parameter>
+        <Sql>select "ANC_SCORE_REGION"."SDATE" as "SDATE", "ANC_SCORE_REGION"."REGION" as "REGION",
+       "ANC_SCORE_REGION"."REGION_EN" as "REGION_EN", "ANC_SCORE_REGION"."FCOMP" as "综合指数",
+       "ANC_SCORE_REGION"."FSERV" as "业务指数", "ANC_SCORE_REGION"."FUSER" as "用户指数", "ANC_SCORE_REGION"."FBALA"
+       as "分流指数", "ANC_SCORE_REGION"."FQUAL" as "质量指数", "ANC_SCORE_REGION"."FCOVE" as "覆盖指数",
+       "ANC_SCORE_REGION"."FCAPA" as "容量指数"
+	,to_date("ANC_SCORE_REGION"."SDATE",'yyyymmdd') as DDATE
+  from "ANC_SCORE_REGION" "ANC_SCORE_REGION"
+ where (to_date("ANC_SCORE_REGION"."SDATE",'yyyymmdd')  = :P_SDATE)</Sql>
+      </Query>
+      <ResultSchema>
+        <DataSet Name="fast_overview_dashboard_map">
+          <View Name="fast_overview_dashboard_map">
+            <Field Name="SDATE" Type="DateTime" />
+            <Field Name="REGION" Type="String" />
+            <Field Name="REGION_EN" Type="String" />
+            <Field Name="综合指数" Type="Decimal" />
+            <Field Name="业务指数" Type="Decimal" />
+            <Field Name="用户指数" Type="Decimal" />
+            <Field Name="分流指数" Type="Decimal" />
+            <Field Name="质量指数" Type="Decimal" />
+            <Field Name="覆盖指数" Type="Decimal" />
+            <Field Name="容量指数" Type="Decimal" />
+            <Field Name="DDATE" Type="DateTime" />
+          </View>
+        </DataSet>
+      </ResultSchema>
+      <ConnectionOptions CloseConnection="true" CommandTimeout="0" />
+    </SqlDataSource>
+  </DataSources>
+  <Parameters>
+    <Parameter Name="P_SDATE" Type="System.DateTime, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" Value="2015-01-01T00:00:00" />
+    <Parameter Name="P_CITY" Value="上海" Description="城市名称" />
+  </Parameters>
+  <Items>
+    <ChoroplethMap ComponentName="choroplethMapDashboardItem1" Name=" " DataSource="dataSource1" DataMember="fast_overview_dashboard_map" ShapefileArea="Custom" LockNavigation="true" AttributeName="NAME">
+      <DataItems>
+        <Measure DataMember="分流指数" SummaryType="Average" UniqueName="DataItem0">
+          <NumericFormat FormatType="Number" />
+        </Measure>
+        <Measure DataMember="覆盖指数" SummaryType="Average" UniqueName="DataItem1">
+          <NumericFormat FormatType="Number" />
+        </Measure>
+        <Measure DataMember="容量指数" SummaryType="Average" UniqueName="DataItem2">
+          <NumericFormat FormatType="Number" />
+        </Measure>
+        <Measure DataMember="业务指数" SummaryType="Average" UniqueName="DataItem3">
+          <NumericFormat FormatType="Number" />
+        </Measure>
+        <Measure DataMember="用户指数" SummaryType="Average" UniqueName="DataItem4">
+          <NumericFormat FormatType="Number" />
+        </Measure>
+        <Measure DataMember="质量指数" SummaryType="Average" UniqueName="DataItem5">
+          <NumericFormat FormatType="Number" />
+        </Measure>
+        <Measure DataMember="综合指数" SummaryType="Average" UniqueName="DataItem6">
+          <NumericFormat FormatType="Number" />
+        </Measure>
+        <Dimension DataMember="REGION" UniqueName="DataItem7" />
+      </DataItems>
+      <CustomShapefile Url="C:\inetpub\wwwroot\SO30\App_Data\DashBoard\NewMap\上海全境_区县界面_region.shp" />
+      <ViewArea TopLatitude="31.86130617" BottomLatitude="30.689588519999997" LeftLongitude="120.85183547999999" RightLongitude="121.93653149999999" CenterPointLatitude="31.27726682582076" CenterPointLongitude="121.39418348999997" />
+      <MapLegend Visible="true" />
+      <WeightedLegend />
+      <AttributeDimension UniqueName="DataItem7" />
+      <Maps>
+        <ValueMap Name="综合指数 (Average)" ValueName="综合指数 (Average)">
+          <Value UniqueName="DataItem6" />
+          <CustomScale PercentScale="false">
+            <RangeStop>0</RangeStop>
+            <RangeStop>40</RangeStop>
+            <RangeStop>60</RangeStop>
+            <RangeStop>75</RangeStop>
+            <RangeStop>90</RangeStop>
+          </CustomScale>
+          <CustomPalette>
+            <Color>-65536</Color>
+            <Color>-256</Color>
+            <Color>-8323200</Color>
+            <Color>-16728065</Color>
+            <Color>-12490271</Color>
+          </CustomPalette>
+        </ValueMap>
+        <ValueMap Name="分流指数 (Average)" ValueName="分流指数 (Average)">
+          <Value UniqueName="DataItem0" />
+          <CustomScale PercentScale="false">
+            <RangeStop>0</RangeStop>
+            <RangeStop>40</RangeStop>
+            <RangeStop>60</RangeStop>
+            <RangeStop>75</RangeStop>
+            <RangeStop>90</RangeStop>
+          </CustomScale>
+          <CustomPalette>
+            <Color>-65536</Color>
+            <Color>-256</Color>
+            <Color>-8323200</Color>
+            <Color>-16728065</Color>
+            <Color>-12490271</Color>
+          </CustomPalette>
+        </ValueMap>
+        <ValueMap Name="覆盖指数 (Average)" ValueName="覆盖指数 (Average)">
+          <Value UniqueName="DataItem1" />
+          <CustomScale PercentScale="false">
+            <RangeStop>0</RangeStop>
+            <RangeStop>40</RangeStop>
+            <RangeStop>60</RangeStop>
+            <RangeStop>75</RangeStop>
+            <RangeStop>90</RangeStop>
+          </CustomScale>
+          <CustomPalette>
+            <Color>-65536</Color>
+            <Color>-256</Color>
+            <Color>-8323200</Color>
+            <Color>-16728065</Color>
+            <Color>-12490271</Color>
+          </CustomPalette>
+        </ValueMap>
+        <ValueMap Name="容量指数 (Average)" ValueName="容量指数 (Average)">
+          <Value UniqueName="DataItem2" />
+          <CustomScale PercentScale="false">
+            <RangeStop>0</RangeStop>
+            <RangeStop>40</RangeStop>
+            <RangeStop>60</RangeStop>
+            <RangeStop>75</RangeStop>
+            <RangeStop>90</RangeStop>
+          </CustomScale>
+          <CustomPalette>
+            <Color>-65536</Color>
+            <Color>-256</Color>
+            <Color>-8323200</Color>
+            <Color>-16728065</Color>
+            <Color>-12490271</Color>
+          </CustomPalette>
+        </ValueMap>
+        <ValueMap Name="业务指数 (Average)" ValueName="业务指数 (Average)">
+          <Value UniqueName="DataItem3" />
+          <CustomScale PercentScale="false">
+            <RangeStop>0</RangeStop>
+            <RangeStop>40</RangeStop>
+            <RangeStop>60</RangeStop>
+            <RangeStop>75</RangeStop>
+            <RangeStop>90</RangeStop>
+          </CustomScale>
+          <CustomPalette>
+            <Color>-65536</Color>
+            <Color>-256</Color>
+            <Color>-8323200</Color>
+            <Color>-16728065</Color>
+            <Color>-12490271</Color>
+          </CustomPalette>
+        </ValueMap>
+        <ValueMap Name="用户指数 (Average)" ValueName="用户指数 (Average)">
+          <Value UniqueName="DataItem4" />
+          <CustomScale PercentScale="false">
+            <RangeStop>0</RangeStop>
+            <RangeStop>40</RangeStop>
+            <RangeStop>60</RangeStop>
+            <RangeStop>75</RangeStop>
+            <RangeStop>90</RangeStop>
+          </CustomScale>
+          <CustomPalette>
+            <Color>-65536</Color>
+            <Color>-256</Color>
+            <Color>-8323200</Color>
+            <Color>-16728065</Color>
+            <Color>-12490271</Color>
+          </CustomPalette>
+        </ValueMap>
+        <ValueMap Name="质量指数 (Average)" ValueName="质量指数 (Average)">
+          <Value UniqueName="DataItem5" />
+          <CustomScale PercentScale="false">
+            <RangeStop>0</RangeStop>
+            <RangeStop>40</RangeStop>
+            <RangeStop>60</RangeStop>
+            <RangeStop>75</RangeStop>
+            <RangeStop>90</RangeStop>
+          </CustomScale>
+          <CustomPalette>
+            <Color>-65536</Color>
+            <Color>-256</Color>
+            <Color>-8323200</Color>
+            <Color>-16728065</Color>
+            <Color>-12490271</Color>
+          </CustomPalette>
+        </ValueMap>
+      </Maps>
+    </ChoroplethMap>
+  </Items>
+  <LayoutTree>
+    <LayoutGroup Orientation="Vertical">
+      <LayoutItem DashboardItem="choroplethMapDashboardItem1" Weight="100" />
+    </LayoutGroup>
+  </LayoutTree>
+</Dashboard>
